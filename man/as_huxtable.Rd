@@ -5,12 +5,14 @@
 \alias{as_hux.etable}
 \title{Convert table to huxtable}
 \usage{
-as_huxtable.etable(x, ...)
+as_huxtable.etable(x, merge.all.cells = F, ...)
 
-as_hux.etable(x, ...)
+as_hux.etable(x, merge.all.cells = F, ...)
 }
 \arguments{
 \item{x}{etable. Table to convert to a huxtable.}
+
+\item{merge.all.cells}{logical. If TRUE merge also inner cells with equal values. If FALSE only column and row labels will be merged.}
 
 \item{...}{arguments passed on to \link[huxtable]{huxtable}.}
 }

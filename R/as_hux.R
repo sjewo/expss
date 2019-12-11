@@ -13,6 +13,7 @@
 #' @export
 #' @rdname as_huxtable
 #' @param x etable. Table to convert to a huxtable.
+#' @param merge.all.cells logical. If TRUE merge also inner cells with equal values. If FALSE only column and row labels will be merged.
 #' @param ... arguments passed on to \link[huxtable]{huxtable}.
 #' @examples 
 #' \dontrun{ 
@@ -56,7 +57,7 @@
 #' export(as_huxtable.etable)
 #' export(as_hux.etable)
 #' }
-as_huxtable.etable = function(x, ...) {
+as_huxtable.etable = function(x, merge.all.cells = F, ...) {
 
   
   # is table empty?
@@ -225,6 +226,13 @@ as_huxtable.etable = function(x, ...) {
       }
     }
   }
+
+  # Make sure only headings are merged
+  if(!merge.all.cells) {
+  attr(ht, "colspan")[-1*seq_len(nrow(coln)), -1*seq_len(ncol(rown))] <- 1
+  attr(ht, "rowspan")[-1*seq_len(nrow(coln)), -1*seq_len(ncol(rown))] <- 1
+  }
+
   # top-left corner
   # corner_width = ncol(split_labels(x[[1]])) 
   # corner_height = ncol(split_labels(colnames(x))) 
